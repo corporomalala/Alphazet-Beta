@@ -1030,7 +1030,7 @@ var WSallWords = "";
       'gridSize': 7,
       'fulaWords': ['jam', 'waali', 'anda'],
       'afrikaansWords': ['jammer', 'welkom', 'dankie'],
-      'lingalaWords': ['mbote', 'mbongo', 'bolingo', 'one', 'two', 'three'],
+      'lingalaWords': ['mbote', 'mbongo', 'bolingo', 'esengo', 'bopeto'],
 	  'wordsList' : [],
       'debug': false
     }
@@ -1678,6 +1678,12 @@ function showModal2(content) {
 $(".js-new-game2").click(function() {
 	refreshWSboard();
 //	this.initialize();
+});
+$(".js-lock").click(function() {
+	var bodyTag = document.querySelector(".js-body");
+	if(bodyTag.getAttribute("appLock") == "true") { bodyTag.setAttribute("appLock", false); }
+	else if(bodyTag.getAttribute("appLock") == "false") { bodyTag.setAttribute("appLock", true); }
+	
 });
 function refreshWSboard() {
 	$(".modal2").removeClass("is-hidden");
