@@ -998,7 +998,8 @@ if (typeof Object.merge != 'function') {
   }
 }
 
-var WSallWords = "";
+var WSallWords = [],
+	WSgameWords = [];
 /** WORDSEARCH **/
 (function(){
   'use strict';
@@ -1028,9 +1029,9 @@ var WSallWords = "";
     var default_settings = {
       'directions': ['W', 'N', 'WN', 'EN'],
       'gridSize': 7,
-      'fulaWords': ['jam', 'waali', 'anda'],
-      'afrikaansWords': ['jammer', 'welkom', 'dankie'],
-      'lingalaWords': ['mbote', 'mbongo', 'bolingo', 'esengo', 'bopeto'],
+      'fulaWords': ['jam', 'waali', 'anda', 'achu', 'hake', 'famili', 'ala', 'eey', 'holto', 'jam', 'jaraama', 'laawol', 'bhural', 'anda', 'wayri', 'yiide', 'nianlen', 'mbadda', 'ndjedhe', 'geno', 'reene'],
+      'afrikaansWords': ['jammer', 'welkom', 'dankie', 'aangenaame', 'kennis', 'asseblief', 'bly', 'kene', 'goed', 'lief', 'joy', 'weet', 'nie', 'met', 'goeie', 'middag', 'nag', 'ja', 'hallo', 'laat', 'gaan', 'nee', 'totsiens', 'verskoon', 'badkamer', 'naam'],
+      'lingalaWords': ['mbote', 'mbongo', 'musala', 'bolingo', 'esengo', 'bopeto', 'pesa', 'tanga', 'somba', 'zua', 'aleki', 'bino', 'na', 'makasi', 'aye', 'lelo', 'biso', 'to', 'yamba', 'ye', 'balingi', 'nini', 'bina', 'ngai', 'boni', 'ndeko', 'kobenga', 'kokamwa', 'kotuna', 'kombo', 'nini', 'lisapo', 'onge', 'mobikisi', 'toluka', 'matondi', 'mingi', 'mbanda', 'nayo', 'aza', 'wapi', 'mbotama', 'elamu', 'mbote', 'wapi', 'miziki', 'ezo', 'mata', 'kaka', 'moto', 'oyo', 'nakomi', 'tembe', 'nalingi', 'somba', 'ndako', 'nani', 'luka', 'nayebi', 'pongi', 'malamo', 'ndako', 'sango', 'soki', 'olingi', 'sima', 'tosenga', 'tozali', 'mopaya', 'wana', 'zala', 'bondimi', 'zela', 'mukie'],
 	  'wordsList' : [],
       'debug': false
     }
@@ -1039,6 +1040,21 @@ var WSallWords = "";
 	if(globalGameLanguage == "fula") { WSallWords = this.settings.fulaWords; }
 	if(globalGameLanguage == "afrikaans") { WSallWords = this.settings.afrikaansWords; }
 	if(globalGameLanguage == "lingala") { WSallWords = this.settings.lingalaWords; }
+	
+	var thisWordList = "";
+	var newWSallWords = WSallWords,
+		newWSgameWords = [];
+	for (var i = 1; i <= 4; i++) {
+		var index = Math.floor(Math.random() * newWSallWords.length);
+		var wordToTake = newWSallWords.splice(index, 1);
+		newWSallWords.pop();
+//		alert(newWSgameWords.length + " ??? "+ WSgameWords.length);
+		if(i !== 1) { thisWordList += ","; }
+//		newWSgameWords = pop()
+		thisWordList += wordToTake;
+	}
+//	alert(thisWordList);
+	WSgameWords = thisWordList.split(",");
 	
 
     // Check the words' length if it is overflow the grid
@@ -1071,12 +1087,12 @@ var WSallWords = "";
   WordSearch.prototype.parseWords = function(maxSize) {
     var itWorked = true;
 
-    for (var i = 0; i < WSallWords.length; i++) {
+    for (var i = 0; i < WSgameWords.length; i++) {
       // Convert all the letters to upper case      
-	  this.settings.wordsList[i] =  WSallWords[i].trim();
-	  WSallWords[i] =  removeDiacritics(this.settings.wordsList[i].trim().toUpperCase());
+	  this.settings.wordsList[i] =  WSgameWords[i].trim();
+	  WSgameWords[i] =  removeDiacritics(this.settings.wordsList[i].trim().toUpperCase());
 
-      var word = WSallWords[i];
+      var word = WSgameWords[i];
       if (word.length > maxSize) {
         alert('The length of word `' + word + '` is overflow the gridSize.');
         console.error('The length of word `' + word + '` is overflow the gridSize.');
@@ -1098,7 +1114,7 @@ var WSallWords = "";
       while (keepGoing) {
         // Getting random direction
         var dir = this.settings.directions[Math.rangeInt(this.settings.directions.length - 1)],
-          result = this.addWord(WSallWords[counter], dir),
+          result = this.addWord(WSgameWords[counter], dir),
           WSisWorked = true;
 
         if (result == false) {
@@ -1107,7 +1123,7 @@ var WSallWords = "";
         }
 
         counter++;
-        if (counter >= WSallWords.length) {
+        if (counter >= WSgameWords.length) {
           keepGoing = false;
         }
       }
@@ -1259,8 +1275,11 @@ var WSallWords = "";
 
         // Add event listeners
         cvEl2.addEventListener('mousedown', this.onMousedown(this.matrix[row][col]));
+//        cvEl2.addEventListener('touchstart', this.onTouchStart(this.matrix[row][col]));
         cvEl2.addEventListener('mouseover', this.onMouseover(this.matrix[row][col]));
+//        cvEl2.addEventListener('touchmove', this.onTouchMove(this.matrix[row][col]));
         cvEl2.addEventListener('mouseup', this.onMouseup());
+//        cvEl2.addEventListener('touchend', this.onTouchEnd());
 
 
 		var spanInDiv = document.createElement("span");
@@ -1277,7 +1296,7 @@ var WSallWords = "";
    * Fill up the remaining items
    */
   WordSearch.prototype.fillUpFools = function() {
-	var rangeLanguage = searchLanguage(WSallWords[0].split('')[0]);
+	var rangeLanguage = searchLanguage(WSgameWords[0].split('')[0]);
     for (var row = 0; row < this.settings.gridSize; row++) {
       for (var col = 0; col < this.settings.gridSize; col++) {
         if (this.matrix[row][col].letter == '.') {
@@ -1348,8 +1367,8 @@ var WSallWords = "";
     }
     words.push(words[0].split('').reverse().join(''));
 
-    if (WSallWords.indexOf(words[0]) > -1 ||
-        WSallWords.indexOf(words[1]) > -1) {
+    if (WSgameWords.indexOf(words[0]) > -1 ||
+        WSgameWords.indexOf(words[1]) > -1) {
       for (var i = 0; i < selected.length; i++) {
         var row = selected[i].row + 1,
           col = selected[i].col + 1,
@@ -1381,7 +1400,7 @@ var WSallWords = "";
       }
 
       //Game over?
-      if(WSsolved == WSallWords.length){
+      if(WSsolved == WSgameWords.length){
         this.gameOver();
       }
     }
@@ -1422,12 +1441,80 @@ var WSallWords = "";
       _this.selectFrom = item;
     }
   }
+  WordSearch.prototype.onTouchStart = function(item) {
+    var _this = this;
+    return function() {
+      _this.selectFrom = item;
+    }
+  }
+  function WStouchStart(item) {
+	  
+    var _this = this;
+    return function() {
+      _this.selectFrom = item;
+    }
+  }
+  
 
   /**
    * Mouse event - Mouse move
    * @param {Object}
    */
   WordSearch.prototype.onMouseover = function(item) {
+    var _this = this;
+    return function() {
+      if (_this.selectFrom) {
+        _this.selected = _this.getItems(_this.selectFrom.row, _this.selectFrom.col, item.row, item.col);
+
+        _this.clearHighlight();
+
+        for (var i = 0; i < _this.selected.length; i ++) {
+          var current = _this.selected[i],
+            row = parseInt(current.row) + 1,
+            col = parseInt(current.col) + 1,
+            el = document.querySelector('.ws-area .ws-row:nth-child(' + row + ') .ws-col:nth-child(' + col + ')');
+
+          el.className += ' ws-selected';
+//		  alert(el.textContent + " i"+ (i + 1) +"(r"+ row +", c"+ col +")");
+        }
+      }
+    }
+  }
+  WordSearch.prototype.onTouchMove = function(item) {
+	  /*
+    var _this = this;
+    return function() {
+      if (_this.selectFrom) {		  
+        _this.selected = _this.getItems(_this.selectFrom.row, _this.selectFrom.col, item.row, item.col);
+
+        _this.clearHighlight();
+
+		var newRow = 0, newCol = 0;
+        for (var i = 0; i < _this.selected.length; i ++) {
+          var current = _this.selected[i],
+            row = parseInt(current.row) + 1,
+            col = parseInt(current.col) + 1,
+            el = document.querySelector('.ws-area .ws-row:nth-child(' + row + ') .ws-col:nth-child(' + col + ')');
+
+			if(i == 0) {
+				newRow = row;
+				newCol = col;
+			}
+			newRow = newRow + 1,
+			newCol = newCol + 1;
+			
+//            el = document.querySelector('.ws-area .ws-row:nth-child(' + newRow + ') .ws-col:nth-child(' + newCol + ')');
+
+          el.className += ' ws-selected';
+//		  alert(el.textContent + " i"+ (i + 1) +"(r"+ newRow +", c"+ newCol +")");
+//		  alert(el.textContent + " i"+ (i + 1) +"(r"+ row +", c"+ col +")");
+        }
+      }
+    }
+	*/
+  }
+  function WStouchMove(item) {
+	  /*
     var _this = this;
     return function() {
       if (_this.selectFrom) {
@@ -1445,6 +1532,7 @@ var WSallWords = "";
         }
       }
     }
+	*/
   }
 
   /**
@@ -1458,6 +1546,29 @@ var WSallWords = "";
       _this.lookup(_this.selected);
       _this.selected = [];
     }
+  }
+  WordSearch.prototype.onTouchEnd = function() {
+	  /*
+    var _this = this;
+    return function() {
+      _this.selectFrom = null;
+      _this.clearHighlight();
+      _this.lookup(_this.selected);
+      _this.selected = [];
+    }
+	*/
+  }
+  
+  function WStouchEnd() {
+	  /*
+    var _this = this;
+    return function() {
+      _this.selectFrom = null;
+      _this.clearHighlight();
+      _this.lookup(_this.selected);
+      _this.selected = [];
+    }
+	*/
   }
 
 })();
@@ -1701,6 +1812,11 @@ function refreshWSboard() {
 function getWSwords() {
 	
 }
+/*
+	window.addEventListener("touchmove", function(event) {
+		alert("touchmove");
+	}
+	*/
 
 /*== [FIREBASE -- Alphazet @ Corporo Malala] ==*/
 
