@@ -81,7 +81,7 @@
 		<link rel="shortlink" href="https://alphazet-beta.corporomalala.com" />
 	</head>
 
-	<body class="js-body d-scrollContainer pg-app" gameLanguageAttribute="fula" nowPlaying="wordsearch" appLock="false" style="background-color: rgb(74, 51, 45);">
+	<body class="js-body d-scrollContainer pg-app" gameLanguageAttribute="fula" nowPlaying="" appLock="false" style="background-color: rgb(74, 51, 45);">
 		<section class="container">
 			
 			<section class="website d-scrollContainer-snap" tabindex="0">
@@ -139,7 +139,9 @@
 			</section>
 			
 			<section class="dvd d-scrollContainer-snap"><div class="dvd-wrap">
+			<!--
 				<img src="https://alphazet-beta.corporomalala.com/assets/images/placeholder-game-landscape.png" class="dvd-placeholder" />
+				-->
 
 <!--				
 				<div class="dvd-content js-dvd-button" goTo="hangman"><div class="dvd-content-wrap">
@@ -157,6 +159,7 @@
 				</div></div>
 				-->
 				
+				<!--
 				<div class="dvd-content js-dvd-button" goTo="wordsearch"><div class="dvd-content-wrap">
 					<header class="dvd-content-header">
 						<span class="dvd-content-header-title nthChild-1">Word Search</span>
@@ -170,7 +173,15 @@
 						<span class="dvd-content-footer-action nthChild-2">&nbsp; Word Search &nbsp; &nbsp; Word Search &nbsp; &nbsp; Word Search &nbsp; &nbsp; Word Search &nbsp; &nbsp; Word Search &nbsp; </span>
 					</footer>
 				</div></div>
+				-->
+
+				<div class="dvd-content js-dvd-button" goTo="hangman"><div class="dvd-content-wrap">
+					Play Hangman
+				</div></div>
 				
+				<div class="dvd-content js-dvd-button" goTo="wordsearch"><div class="dvd-content-wrap">
+					Play Word Search
+				</div></div>
 				
 				<!--
 				<path id="rectangular_path" class="d-rectangularSVG-path" fill="red" d="M30 30 H371 V570 H30 Z" />
@@ -180,7 +191,7 @@
 				-->
 			</div></section>
 			
-			<section class="game d-scrollContainer-snap">			
+			<section class="game d-scrollContainer-snap">
 				<div class="game-wrap is-game-hangman">
 					
 			<section class="game-body game-HANGMAN">
@@ -303,7 +314,6 @@
 					<br />
 					<br />
 					<a href="https://translate.google.com/contribute" target="_blank">https://translate.google.com/contribute</a>
-					
 					<div class="section3-body-glossary">
 						<form class="section3-body-glossary-form js-form">
 							<div>
@@ -379,13 +389,13 @@
 					</div>
 					
 				</section>
-					<div class="splash">
-					</div>
+
+				<div class="splash">
+					<p class="splash-text">The word search game was built for laptops.</p>
+					<br /><br />
+					<div class="splash-button js-splash-button">Go back!</div>
+				</div>
 			</section>
-			
-			<script>
-//				document.querySelector("*").remove();
-			</script>
 		</section>
 		
 		<script src="https://alphazet-beta.corporomalala.com/assets/scripts/alphazet-at-corporo-malala.js" type="module"></script>

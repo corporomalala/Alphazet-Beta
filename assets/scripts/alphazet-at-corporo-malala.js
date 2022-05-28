@@ -284,6 +284,10 @@ $(".js-dvd-button").click(function() {
         guessLetter(letter);
       });
 });
+$(".js-splash-button").click(function() {
+	document.querySelector(".js-body").setAttribute("nowPlaying", "");
+	document.querySelector(".js-body").setAttribute("appLock", "false");
+});
 /*** END COMPONENTS ***/
 
 /*** TEST AREA ***/
@@ -1031,7 +1035,7 @@ var WSallWords = [],
       'gridSize': 7,
       'fulaWords': ['jam', 'waali', 'anda', 'achu', 'hake', 'famili', 'ala', 'eey', 'holto', 'jam', 'jaraama', 'laawol', 'bhural', 'anda', 'wayri', 'yiide', 'nianlen', 'mbadda', 'ndjedhe', 'geno', 'reene'],
       'afrikaansWords': ['jammer', 'welkom', 'dankie', 'aangenaame', 'kennis', 'asseblief', 'bly', 'kene', 'goed', 'lief', 'joy', 'weet', 'nie', 'met', 'goeie', 'middag', 'nag', 'ja', 'hallo', 'laat', 'gaan', 'nee', 'totsiens', 'verskoon', 'badkamer', 'naam'],
-      'lingalaWords': ['mbote', 'mbongo', 'musala', 'bolingo', 'esengo', 'bopeto', 'pesa', 'tanga', 'somba', 'zua', 'aleki', 'bino', 'na', 'makasi', 'aye', 'lelo', 'biso', 'to', 'yamba', 'ye', 'balingi', 'nini', 'bina', 'ngai', 'boni', 'ndeko', 'kobenga', 'kokamwa', 'kotuna', 'kombo', 'nini', 'lisapo', 'onge', 'mobikisi', 'toluka', 'matondi', 'mingi', 'mbanda', 'nayo', 'aza', 'wapi', 'mbotama', 'elamu', 'mbote', 'wapi', 'miziki', 'ezo', 'mata', 'kaka', 'moto', 'oyo', 'nakomi', 'tembe', 'nalingi', 'somba', 'ndako', 'nani', 'luka', 'nayebi', 'pongi', 'malamo', 'ndako', 'sango', 'soki', 'olingi', 'sima', 'tosenga', 'tozali', 'mopaya', 'wana', 'zala', 'bondimi', 'zela', 'mukie'],
+      'lingalaWords': ['mbote', 'mbongo', 'musala', 'bolingo', 'esengo', 'bopeto', 'pesa', 'tanga', 'somba', 'zua', 'aleki', 'bino', 'na', 'makasi', 'aye', 'lelo', 'biso', 'to', 'yamba', 'ye', 'balingi', 'nini', 'bina', 'ngai', 'boni', 'ndeko', 'kobenga', 'kokamwa', 'kotuna', 'kombo', 'nini', 'lisapo', 'onge', 'toluka', 'matondi', 'mingi', 'mbanda', 'nayo', 'aza', 'wapi', 'mbotama', 'elamu', 'mbote', 'wapi', 'miziki', 'ezo', 'mata', 'kaka', 'moto', 'oyo', 'nakomi', 'tembe', 'nalingi', 'somba', 'ndako', 'nani', 'luka', 'nayebi', 'pongi', 'malamo', 'ndako', 'sango', 'soki', 'olingi', 'sima', 'tosenga', 'tozali', 'mopaya', 'wana', 'zala', 'bondimi', 'zela', 'mukie'],
 	  'wordsList' : [],
       'debug': false
     }
